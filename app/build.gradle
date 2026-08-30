@@ -1,0 +1,253 @@
+plugins {
+    id 'com.android.application'
+}
+
+// 精简包（构建时加 -Pslim）：不把 300MB 内置环境打进 APK。
+//
+// 为什么要有这个：完整包 391MB，在内存紧张的机器上覆盖安装会被 PackageInstaller
+// 中途掐掉（报 INSTALL_FAILED_INTERNAL_ERROR / Session destroyed，且卸载后反而能装 ——
+// 说明卡在「旧包还在、同时又要 staging 一份 391MB」这一步）。而已经解压过环境的设备
+// 根本不需要再收一遍那 300MB。精简包约 40MB，**只能给装过完整包的设备做更新**，
+// 全新安装仍须用完整包（App 启动时会自己识别并提示，见 ProotBootstrap.hasOfflineBundle）。
+def slim = project.hasProperty('slim')
+
+def offlineGz = file("src/main/assets/offline-rootfs.tar.gz")
+def offlineBin = file("src/main/assets/offline-rootfs.bin")
+if (!slim && !offlineGz.exists() && !offlineBin.exists()) {
+    throw new GradleException(
+        "缺少内置离线环境包 app/src/main/assets/offline-rootfs.tar.gz ——\n" +
+        "它由 GitHub Actions 在 ubuntu-24.04-arm 上 chroot 预装生成。\n" +
+        "本地构建请从 Actions 的 offline-rootfs-bundle 产物拷到该路径。\n" +
+        "（只想出精简更新包的话加 -Pslim，那种包不含内置环境。）")
+}
+
+// aapt 会把 .tar.gz 自动解压成 .tar。打进 APK 前改名为 .bin。
+tasks.register("protectOfflineBundle") {
+    doLast {
+        if (offlineGz.exists()) {
+            offlineBin.delete()
+            if (!offlineGz.renameTo(offlineBin)) {
+                throw new GradleException("无法把 offline-rootfs.tar.gz 改名为 .bin")
+            }
+        }
+    }
+}
+tasks.configureEach { t ->
+    if (t.name == "preBuild" || t.name == "preDebugBuild") {
+        t.dependsOn("protectOfflineBundle")
+    }
+    // 精简包：assets 合并完之后把内置环境与它的版本标记一起剔掉。
+    // 版本标记必须一起删 —— 留着会让 App 拿「内置版本」跟已解压的比，
+    // 判出「有新版可升级」却又找不到包，等于给用户一个死按钮。
+    if (slim && t.name ==~ /(?i)merge.*Assets/) {
+        t.doLast {
+            def dir = t.hasProperty("outputDir") ? t.outputDir.get().asFile : null
+            if (dir != null) {
+                ["offline-rootfs.bin", "offline-rootfs.tar.gz", "offline-rootfs.tar",
+                 "offline-rootfs.version"].each { n ->
+                    def f = new File(dir, n)
+                    if (f.exists()) {
+                        println "slim：从 assets 剔除 ${n}（${f.length()} 字节）"
+                        f.delete()
+                    }
+                }
+            }
+        }
+    }
+}
+
+android {
+    namespace 'com.deepseekharness.app'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.dafeiyu.app"
+        minSdk 26
+        targetSdk 34
+        versionCode 1
+        versionName "0.1.0-dafeiyu"
+        ndk {
+            abiFilters 'arm64-v8a'
+        }
+    }
+
+    signingConfigs {
+        debug {
+            // APK 签名。**线上包实际用的不是 DSHA-release.keystore**：secret
+            // DSHA_KEYSTORE_B64 里存的是一份 debug keystore（alias androiddebugkey，
+            // 证书指纹 E7:E3:A3:1A:75:94:6F:26…），当初设 secret 时传错了文件，
+            // v1.1.7 起发出去的包都是它签的。Android 只允许同签名覆盖安装，换密钥
+            // 等于逼所有用户卸载重装（rootfs 在私有目录，卸载即丢），所以现在以线上
+            // 实际密钥为准，密钥轮换（v3 rotation）单独排期。
+            // 完整查证与三条路的取舍见工作区 DSHA-签名现状与风险.md。
+            //
+            // 用法：DSHA_KEYSTORE=/path/to/keystore
+            //       DSHA_KEYSTORE_PASSWORD / DSHA_KEY_ALIAS / DSHA_KEY_PASSWORD
+            //       （CI 走同名 secrets；本地 ./build.sh 会自动指向线上发布密钥）
+            // 一个也没给时会退回 AGP 默认 debug keystore，并大声警告 —— 那种包每次
+            // 构建的指纹都不同，装出去谁也升级不了，只能自己调试用。
+            //
+            // 另有一把**不同的**钥匙：DSHA-release.keystore（alias dsha，RSA 4096，
+            // 指纹 ED:8A:AE:A2…）现在只用来签增量更新清单
+            // （tools/sign-runtime-manifest.sh，公钥内置在 assets/runtime-update-pubkey.pem）。
+            // 两把钥匙各管一件事，不要混用。
+            def ksPath = System.getenv("DSHA_KEYSTORE") ?: project.findProperty("dsha.keystore")
+            if (ksPath != null && !ksPath.toString().isEmpty() && file(ksPath).exists()) {
+                storeFile file(ksPath)
+                storePassword System.getenv("DSHA_KEYSTORE_PASSWORD")
+                        ?: project.findProperty("dsha.keystore.password") ?: ""
+                keyAlias System.getenv("DSHA_KEY_ALIAS")
+                        ?: project.findProperty("dsha.key.alias") ?: "dsha"
+                keyPassword System.getenv("DSHA_KEY_PASSWORD")
+                        ?: project.findProperty("dsha.key.password") ?: ""
+                println "签名：release keystore ${ksPath}（alias=${keyAlias}）"
+            } else {
+                println "⚠️ 签名：未配置 DSHA_KEYSTORE，退回 debug keystore —— 仅供本地调试，" +
+                        "不可用于发布（用户将无法覆盖升级）"
+            }
+            enableV1Signing true
+            enableV2Signing true
+            enableV3Signing true
+        }
+    }
+
+    buildTypes {
+        debug {
+            // 产物是对外发布的，不能让任意调试器附加上来（AGP 默认给 debug 构建
+            // 加 android:debuggable="true"，这里显式关掉）
+            debuggable false
+            signingConfig signingConfigs.debug
+        }
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+            proguardFiles(
+                getDefaultProguardFile('proguard-android-optimize.txt'),
+                'proguard-rules.pro'
+            )
+        }
+    }
+
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging = true
+            excludes += ['**/x86/**', '**/x86_64/**', '**/armeabi/**', '**/armeabi-v7a/**']
+        }
+    }
+
+    androidResources {
+        // 这些 entry 本身已经是压缩格式，让 aapt 再 deflate 一遍是纯亏：
+        // 打包时白花 CPU（离线包 301MB 只压掉 1%），运行时还多一层 inflate。
+        //
+        // **'bin' 是必须的**：protectOfflineBundle 会把 offline-rootfs.tar.gz 改名成 .bin
+        //（aapt 会悄悄把 .tar.gz 解开），改完名之后上面那个 'gz' 就管不到它了 ——
+        // 两个机制互相打脸，实测 APK 里 assets/offline-rootfs.bin 一直是 DEFLATE：
+        // 301252487 → 298128549，压掉 1%，代价是打包多花几分钟、首次解压多 inflate 一遍
+        // 整个 301MB。改成 STORED 之后 APK 大约 +3MB，换来的是首启解压少一层。
+        //
+        // 'ja' 是 GeckoView 的 omni.ja（Gecko 期望能直接 mmap，压着会强制先解压）；
+        // 'tar' 是 adb-wheels.tar；'whl' 是 zstandard 的 wheel（本身就是 zip）。
+        noCompress += ['gz', 'xz', 'bin', 'ja', 'tar', 'whl']
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    buildFeatures {
+        aidl = true
+        // AGP 8 默认不生成 BuildConfig；UpdateChecker 用它取版本号做 UA
+        buildConfig = true
+    }
+
+    sourceSets {
+        main {
+            aidl.srcDirs = ['src/main/aidl']
+        }
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.11.0'
+    // 代码里并不直接用 ConstraintLayout，但这行必须留着：material 1.11.0 传递依赖
+    // constraintlayout 2.0.1，而本地 maven 缓存只有 2.1.4。删掉这行 → 离线构建直接
+    // 报「No cached version of androidx.constraintlayout:constraintlayout:2.0.1」。
+    // 也就是说它的作用是把传递依赖提升到已缓存的版本。（试删过，构建挂了才发现）
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.fragment:fragment:1.6.2'
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+    implementation 'dev.rikka.shizuku:api:13.1.5'
+    implementation 'dev.rikka.shizuku:provider:13.1.5'
+    implementation 'org.mozilla.geckoview:geckoview-arm64-v8a:126.0.20240526221752'
+    // 真 PTY 终端（阶段 1，见 docs/ROADMAP.md）：Termux 官方把终端拆成了独立库，
+    // terminal-view 与 terminal-emulator 这两个子模块是 Apache 2.0（termux-app 整体
+    // GPLv3，但这两个不是），与本项目的 MIT 兼容。terminal-emulator 会作为
+    // terminal-view 的传递依赖自动带进来，它自带 JNI 的 PTY 层（openpty + fork/exec）。
+    //
+    // **坐标别照 Termux Wiki 抄**：Wiki 上写的是 com.termux:terminal-view:0.118.0，
+    // 那个 groupId 在 JitPack 上返回 401（它会把 com/termux/terminal-view 当成 GitHub
+    // 仓库 termux/terminal-view 去找，那个仓库不存在）。JitPack 多模块的真实坐标是
+    // groupId = 域名 + 仓库名，即 com.termux.termux-app；查证方式：
+    //   curl https://jitpack.io/api/builds/com.termux/termux-app/0.118.0
+    //   → modules: [terminal-emulator, terminal-view, termux-shared]
+    implementation 'com.termux.termux-app:terminal-view:0.118.0'
+    // **这里不要加 com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava。**
+    // Termux Wiki 让加它，前提是你引了 termux-shared —— 那个依赖完整版 guava，会和
+    // listenablefuture:1.0 撞 Duplicate class，用空占位包顶掉后者正好。
+    // 我们只用 terminal-view，项目里根本没有 guava：加空包等于把真正的 ListenableFuture
+    // 接口换成了空的，androidx 的 concurrent-futures 因此失去父接口，App 一启动
+    // ProfileInstaller 就崩 ——
+    //   NoClassDefFoundError: Failed resolution of: Landroidx/concurrent/futures/AbstractResolvableFuture;
+    // 真机上崩过（v1.1.9-rc1 那个带 PTY 的本地包）。依赖树可自证：
+    //   gradle :app:dependencies --configuration debugRuntimeClasspath | grep -i guava
+    //   → 只有 listenablefuture，没有 com.google.guava:guava，所以压根不存在要解决的冲突。
+    debugImplementation 'com.github.L-JINBIN:MTDataFilesProvider:v1.0.0'
+}
+
+afterEvaluate {
+    def verify = tasks.register("verifyArm64Apk") {
+        doLast {
+            def apk = file("build/outputs/apk/debug/app-debug.apk")
+            if (!apk.isFile()) {
+                throw new GradleException("找不到 " + apk)
+            }
+            def z = new java.util.zip.ZipFile(apk)
+            def libs = []
+            def assets = []
+            z.entries().each { e ->
+                if (e.name.startsWith("lib/") && e.name.endsWith(".so")) {
+                    libs << e.name
+                }
+                if (e.name.contains("offline") || e.name.contains("rootfs") || e.name.startsWith("assets/")) {
+                    assets << (e.name + " size=" + e.size)
+                }
+            }
+            z.close()
+            println "===== APK native libs ====="
+            libs.each { println "  " + it }
+            println "===== APK assets ====="
+            assets.each { println "  " + it }
+            def hasBundle = assets.any {
+                it.contains("offline-rootfs") || it.contains("rootfs.tar") || it.contains("offline_rootfs")
+            }
+            if (!hasBundle) {
+                throw new GradleException("APK 里没有 offline-rootfs。assets: " + assets)
+            }
+            if (libs.isEmpty()) {
+                throw new GradleException("APK 里没有 lib/*.so")
+            }
+            if (!libs.any { it.startsWith("lib/arm64-v8a/") }) {
+                throw new GradleException("APK 不含 lib/arm64-v8a/")
+            }
+            def bad = libs.findAll { !it.startsWith("lib/arm64-v8a/") }
+            if (!bad.isEmpty()) {
+                throw new GradleException("APK 混进了非 arm64 库: " + bad)
+            }
+        }
+    }
+    tasks.matching { it.name == "assembleDebug" }.configureEach {
+        finalizedBy(verify)
+    }
+}

@@ -1,0 +1,47 @@
+# Gradle / Android
+.gradle/
+build/
+app/build/
+local.properties
+*.iml
+.idea/
+captures/
+.externalNativeBuild/
+.cxx/
+
+# 构建产物（APK）
+*.apk
+*.aab
+
+# 离线 rootfs（由 CI 生成，体积 200MB+，不要提交）
+app/src/main/assets/offline-rootfs.tar.gz
+app/src/main/assets/offline-rootfs.bin
+app/src/main/assets/offline-rootfs.tar
+# 版本标记必须和上面那个包同步生成 —— 跟着仓库走就会与实际内容脱节：
+# v1.1.9-rc1 时仓库里写的是 dsh-0.1.1-rc.2，包里烤的却是 0.1.0-rc.6，
+# 用户被提示「发现新版内置环境」，点升级反而降级了。CI 与 tools/pack-local.sh 都会现写。
+app/src/main/assets/offline-rootfs.version
+bundle/
+
+# 系统/编辑器
+.DS_Store
+*.log
+
+# 构建产物校验文件
+*.sha256
+
+# 签名密钥绝不入库
+*.keystore
+*.jks
+
+# Python 字节码缓存：在容器里跑过 assets 里的脚本就会生成，
+# 之前有一份 adb-shell.cpython-312.pyc 混进了 APK
+__pycache__/
+*.pyc
+
+# 别的 App 的备份包会被误存到仓库根目录（一份 62MB 的 rikkahub 备份差点被 git add）
+*_backup_*.zip
+
+# proot 的硬链接替身：--link2symlink 在工作区里建硬链接时会留下 .l2s.<名字>NNNN
+# 这种文件（比如打包脚本给 APK 建带指纹副本的时候）。容器实现细节，不该进仓库。
+.l2s.*

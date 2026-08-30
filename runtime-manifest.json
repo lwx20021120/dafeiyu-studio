@@ -1,0 +1,392 @@
+{
+  "schema": 1,
+  "generated": "2026-08-29T05:07:22Z",
+  "note": "只含脚本层增量；rootfs 与 .so 随 APK 发布，不在此清单内",
+  "files": [
+    {
+      "path": "app/src/main/assets/adb-pair.py",
+      "asset": "adb-pair.py",
+      "size": 8080,
+      "sha256": "fc59d12a7beac5b3d5775fc354ff694eefd280686d6a8802398476fd8cea3601",
+      "urls": [
+        "https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/adb-pair.py",
+        "https://cdn.jsdelivr.net/gh/lwx20021120/dafeiyu-studio@main/app/src/main/assets/adb-pair.py",
+        "https://ghproxy.net/https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/adb-pair.py"
+      ]
+    },
+    {
+      "path": "app/src/main/assets/adb-setup.sh",
+      "asset": "adb-setup.sh",
+      "size": 5212,
+      "sha256": "e0f2b3fd86228230a9341c9c807f116080c7d7059546388195bfd3bfc85f901b",
+      "urls": [
+        "https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/adb-setup.sh",
+        "https://cdn.jsdelivr.net/gh/lwx20021120/dafeiyu-studio@main/app/src/main/assets/adb-setup.sh",
+        "https://ghproxy.net/https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/adb-setup.sh"
+      ]
+    },
+    {
+      "path": "app/src/main/assets/adb-shell.py",
+      "asset": "adb-shell.py",
+      "size": 13132,
+      "sha256": "931970701d5f63bb917946459f90ec8f3d3724177ed2a8732696fc7098d9ef51",
+      "urls": [
+        "https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/adb-shell.py",
+        "https://cdn.jsdelivr.net/gh/lwx20021120/dafeiyu-studio@main/app/src/main/assets/adb-shell.py",
+        "https://ghproxy.net/https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/adb-shell.py"
+      ]
+    },
+    {
+      "path": "app/src/main/assets/backup-prepare.py",
+      "asset": "backup-prepare.py",
+      "size": 12366,
+      "sha256": "20fd6fd44fd6bfcc91217f8a1fc2a611bcf5513731ef749531ededa45fa95d80",
+      "urls": [
+        "https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/backup-prepare.py",
+        "https://cdn.jsdelivr.net/gh/lwx20021120/dafeiyu-studio@main/app/src/main/assets/backup-prepare.py",
+        "https://ghproxy.net/https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/backup-prepare.py"
+      ]
+    },
+    {
+      "path": "app/src/main/assets/check-dsh-dupes.py",
+      "asset": "check-dsh-dupes.py",
+      "size": 7351,
+      "sha256": "e3d8eb7abbbd2caeed711101d50df543b3a302d36abdcc218ff652126fd50348",
+      "urls": [
+        "https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/check-dsh-dupes.py",
+        "https://cdn.jsdelivr.net/gh/lwx20021120/dafeiyu-studio@main/app/src/main/assets/check-dsh-dupes.py",
+        "https://ghproxy.net/https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/check-dsh-dupes.py"
+      ]
+    },
+    {
+      "path": "app/src/main/assets/config-fix.js",
+      "asset": "config-fix.js",
+      "size": 1399,
+      "sha256": "b35fed68cb3b47c86f65f9f41a42c5f5e32c5c713216f288816e35edf35a32d6",
+      "urls": [
+        "https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/config-fix.js",
+        "https://cdn.jsdelivr.net/gh/lwx20021120/dafeiyu-studio@main/app/src/main/assets/config-fix.js",
+        "https://ghproxy.net/https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/config-fix.js"
+      ]
+    },
+    {
+      "path": "app/src/main/assets/dsh-deps-heal.sh",
+      "asset": "dsh-deps-heal.sh",
+      "size": 4627,
+      "sha256": "cc7d5644325fe0da1395bf37854ef81f32b14928274dd297837b42f2d4be696b",
+      "urls": [
+        "https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/dsh-deps-heal.sh",
+        "https://cdn.jsdelivr.net/gh/lwx20021120/dafeiyu-studio@main/app/src/main/assets/dsh-deps-heal.sh",
+        "https://ghproxy.net/https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/dsh-deps-heal.sh"
+      ]
+    },
+    {
+      "path": "app/src/main/assets/fix-stale-bundles.sh",
+      "asset": "fix-stale-bundles.sh",
+      "size": 2824,
+      "sha256": "c352f0ceb7b9d50a45499318723d72ca4e9383501912248d3a391b4fddbff7a0",
+      "urls": [
+        "https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/fix-stale-bundles.sh",
+        "https://cdn.jsdelivr.net/gh/lwx20021120/dafeiyu-studio@main/app/src/main/assets/fix-stale-bundles.sh",
+        "https://ghproxy.net/https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/fix-stale-bundles.sh"
+      ]
+    },
+    {
+      "path": "app/src/main/assets/flatten-l2s.py",
+      "asset": "flatten-l2s.py",
+      "size": 9051,
+      "sha256": "57dcde8eb8feb0db240baa47e896a05f8d1ad1320127391e79cccc8388da9d01",
+      "urls": [
+        "https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/flatten-l2s.py",
+        "https://cdn.jsdelivr.net/gh/lwx20021120/dafeiyu-studio@main/app/src/main/assets/flatten-l2s.py",
+        "https://ghproxy.net/https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/flatten-l2s.py"
+      ]
+    },
+    {
+      "path": "app/src/main/assets/fs-write-patch.sh",
+      "asset": "fs-write-patch.sh",
+      "size": 7259,
+      "sha256": "99da4df440d42a8908001075234bea393fb849fdafd43aaa3d7cc09947627550",
+      "urls": [
+        "https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/fs-write-patch.sh",
+        "https://cdn.jsdelivr.net/gh/lwx20021120/dafeiyu-studio@main/app/src/main/assets/fs-write-patch.sh",
+        "https://ghproxy.net/https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/fs-write-patch.sh"
+      ]
+    },
+    {
+      "path": "app/src/main/assets/heal-pnpm-shells.py",
+      "asset": "heal-pnpm-shells.py",
+      "size": 7261,
+      "sha256": "7f6b7df58c844cf535698fccec3047566848248e84030f3d60f5b18ff8f44524",
+      "urls": [
+        "https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/heal-pnpm-shells.py",
+        "https://cdn.jsdelivr.net/gh/lwx20021120/dafeiyu-studio@main/app/src/main/assets/heal-pnpm-shells.py",
+        "https://ghproxy.net/https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/heal-pnpm-shells.py"
+      ]
+    },
+    {
+      "path": "app/src/main/assets/heal-profile-boot.py",
+      "asset": "heal-profile-boot.py",
+      "size": 5470,
+      "sha256": "e96dbf3d40246253a165d4dbdec974f835d07f7eabe777e34329c2d99b8a6228",
+      "urls": [
+        "https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/heal-profile-boot.py",
+        "https://cdn.jsdelivr.net/gh/lwx20021120/dafeiyu-studio@main/app/src/main/assets/heal-profile-boot.py",
+        "https://ghproxy.net/https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/heal-profile-boot.py"
+      ]
+    },
+    {
+      "path": "app/src/main/assets/heal-session.sh",
+      "asset": "heal-session.sh",
+      "size": 1398,
+      "sha256": "74a777da58a98943d5834f40685e31020265027e24dc5edb0699d474bd28f1cb",
+      "urls": [
+        "https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/heal-session.sh",
+        "https://cdn.jsdelivr.net/gh/lwx20021120/dafeiyu-studio@main/app/src/main/assets/heal-session.sh",
+        "https://ghproxy.net/https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/heal-session.sh"
+      ]
+    },
+    {
+      "path": "app/src/main/assets/heal-sessions.py",
+      "asset": "heal-sessions.py",
+      "size": 17165,
+      "sha256": "d7e97239f92026e00bc52f1ceeffb8b59aee06ca15f4a333cefaedbdf6502544",
+      "urls": [
+        "https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/heal-sessions.py",
+        "https://cdn.jsdelivr.net/gh/lwx20021120/dafeiyu-studio@main/app/src/main/assets/heal-sessions.py",
+        "https://ghproxy.net/https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/heal-sessions.py"
+      ]
+    },
+    {
+      "path": "app/src/main/assets/install-termux.sh",
+      "asset": "install-termux.sh",
+      "size": 2994,
+      "sha256": "29c8d662dd85cf1a2ff033e966631e410e202bf9e821f1d154801f24dd3b7e27",
+      "urls": [
+        "https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/install-termux.sh",
+        "https://cdn.jsdelivr.net/gh/lwx20021120/dafeiyu-studio@main/app/src/main/assets/install-termux.sh",
+        "https://ghproxy.net/https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/install-termux.sh"
+      ]
+    },
+    {
+      "path": "app/src/main/assets/install.sh",
+      "asset": "install.sh",
+      "size": 1880,
+      "sha256": "48a700dbf3676c050fd8b7b39966335953e6d92e59098223d16092102dde6fac",
+      "urls": [
+        "https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/install.sh",
+        "https://cdn.jsdelivr.net/gh/lwx20021120/dafeiyu-studio@main/app/src/main/assets/install.sh",
+        "https://ghproxy.net/https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/install.sh"
+      ]
+    },
+    {
+      "path": "app/src/main/assets/lan-bind-patch.sh",
+      "asset": "lan-bind-patch.sh",
+      "size": 5137,
+      "sha256": "31e94c3a26668411a2d697a1560d4ab3f72210b015bdd27bf5d4f492784a5e7b",
+      "urls": [
+        "https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/lan-bind-patch.sh",
+        "https://cdn.jsdelivr.net/gh/lwx20021120/dafeiyu-studio@main/app/src/main/assets/lan-bind-patch.sh",
+        "https://ghproxy.net/https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/lan-bind-patch.sh"
+      ]
+    },
+    {
+      "path": "app/src/main/assets/migrate-public-data.sh",
+      "asset": "migrate-public-data.sh",
+      "size": 4112,
+      "sha256": "e8a670d8b1cb319630bd872722fda05a26c17ea3b61944f3226d5af0035ec15b",
+      "urls": [
+        "https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/migrate-public-data.sh",
+        "https://cdn.jsdelivr.net/gh/lwx20021120/dafeiyu-studio@main/app/src/main/assets/migrate-public-data.sh",
+        "https://ghproxy.net/https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/migrate-public-data.sh"
+      ]
+    },
+    {
+      "path": "app/src/main/assets/pnpm-env-fix.sh",
+      "asset": "pnpm-env-fix.sh",
+      "size": 3126,
+      "sha256": "016e78543e61b73929f88dc448da75c646a96d8881514b165a02d334598ad2ff",
+      "urls": [
+        "https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/pnpm-env-fix.sh",
+        "https://cdn.jsdelivr.net/gh/lwx20021120/dafeiyu-studio@main/app/src/main/assets/pnpm-env-fix.sh",
+        "https://ghproxy.net/https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/pnpm-env-fix.sh"
+      ]
+    },
+    {
+      "path": "app/src/main/assets/restore-merge.py",
+      "asset": "restore-merge.py",
+      "size": 22296,
+      "sha256": "529ba543a9664dc8a238a12c674fef693ff0d4ed92792f4d4cd6a3acc4cff390",
+      "urls": [
+        "https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/restore-merge.py",
+        "https://cdn.jsdelivr.net/gh/lwx20021120/dafeiyu-studio@main/app/src/main/assets/restore-merge.py",
+        "https://ghproxy.net/https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/restore-merge.py"
+      ]
+    },
+    {
+      "path": "app/src/main/assets/rootfs-confirm-install.sh",
+      "asset": "rootfs-confirm-install.sh",
+      "size": 8007,
+      "sha256": "bbcd5fb47cf88cfeed73e830b66c83beecc187b90a00fe5a89e9bb7261c198aa",
+      "urls": [
+        "https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/rootfs-confirm-install.sh",
+        "https://cdn.jsdelivr.net/gh/lwx20021120/dafeiyu-studio@main/app/src/main/assets/rootfs-confirm-install.sh",
+        "https://ghproxy.net/https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/rootfs-confirm-install.sh"
+      ]
+    },
+    {
+      "path": "app/src/main/assets/selftest.py",
+      "asset": "selftest.py",
+      "size": 67478,
+      "sha256": "2ddc457aeb6be4e67e21cf639808ad19c8421e4605f77df5f0cbd46877d2c6d4",
+      "urls": [
+        "https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/selftest.py",
+        "https://cdn.jsdelivr.net/gh/lwx20021120/dafeiyu-studio@main/app/src/main/assets/selftest.py",
+        "https://ghproxy.net/https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/selftest.py"
+      ]
+    },
+    {
+      "path": "app/src/main/assets/webserver-auth-patch.sh",
+      "asset": "webserver-auth-patch.sh",
+      "size": 5696,
+      "sha256": "0aed65c27904b59e01aeb5207f8ef4c3f1f2573026299529d9cd01c519ffeb24",
+      "urls": [
+        "https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/webserver-auth-patch.sh",
+        "https://cdn.jsdelivr.net/gh/lwx20021120/dafeiyu-studio@main/app/src/main/assets/webserver-auth-patch.sh",
+        "https://ghproxy.net/https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/webserver-auth-patch.sh"
+      ]
+    },
+    {
+      "path": "app/src/main/assets/webui-degrade-patch.sh",
+      "asset": "webui-degrade-patch.sh",
+      "size": 1465,
+      "sha256": "4cebcc4233197723b1acfafb772248f13c4c042a347a8ed718716765c3997313",
+      "urls": [
+        "https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/webui-degrade-patch.sh",
+        "https://cdn.jsdelivr.net/gh/lwx20021120/dafeiyu-studio@main/app/src/main/assets/webui-degrade-patch.sh",
+        "https://ghproxy.net/https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/webui-degrade-patch.sh"
+      ]
+    },
+    {
+      "path": "app/src/main/assets/webui-origin-port-patch.sh",
+      "asset": "webui-origin-port-patch.sh",
+      "size": 2378,
+      "sha256": "8647f3908b37887deaff1bc109a5c47a6c956fd32bba21854cbe77a7c6c63ffa",
+      "urls": [
+        "https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/webui-origin-port-patch.sh",
+        "https://cdn.jsdelivr.net/gh/lwx20021120/dafeiyu-studio@main/app/src/main/assets/webui-origin-port-patch.sh",
+        "https://ghproxy.net/https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/webui-origin-port-patch.sh"
+      ]
+    },
+    {
+      "path": "app/src/main/assets/webui-polyfill.sh",
+      "asset": "webui-polyfill.sh",
+      "size": 4010,
+      "sha256": "61e7355d1c1c14d46c8bf1e954ebc5a38d180dd4f3965efcbdeca4bd798ae543",
+      "urls": [
+        "https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/webui-polyfill.sh",
+        "https://cdn.jsdelivr.net/gh/lwx20021120/dafeiyu-studio@main/app/src/main/assets/webui-polyfill.sh",
+        "https://ghproxy.net/https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/webui-polyfill.sh"
+      ]
+    },
+    {
+      "path": "app/src/main/assets/status-overlay/package.json",
+      "asset": "status-overlay/package.json",
+      "size": 539,
+      "sha256": "c5ccc0a6959f3ce7eebcac0564cc58478d6df406af8352997a051272a47ba689",
+      "urls": [
+        "https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/status-overlay/package.json",
+        "https://cdn.jsdelivr.net/gh/lwx20021120/dafeiyu-studio@main/app/src/main/assets/status-overlay/package.json",
+        "https://ghproxy.net/https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/status-overlay/package.json"
+      ]
+    },
+    {
+      "path": "app/src/main/assets/status-overlay/lib/index.js",
+      "asset": "status-overlay/lib/index.js",
+      "size": 13892,
+      "sha256": "5a44140e9a447decd936f2ad5d5cebf10da41c00488d1d762f6afc7129a49b88",
+      "urls": [
+        "https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/status-overlay/lib/index.js",
+        "https://cdn.jsdelivr.net/gh/lwx20021120/dafeiyu-studio@main/app/src/main/assets/status-overlay/lib/index.js",
+        "https://ghproxy.net/https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/status-overlay/lib/index.js"
+      ]
+    },
+    {
+      "path": "app/src/main/assets/device-shell-guide/package.json",
+      "asset": "device-shell-guide/package.json",
+      "size": 539,
+      "sha256": "43b93a6b2755f512085e61d9385d5924a0f1b68a7abcf42edd77dcf4fccc33a9",
+      "urls": [
+        "https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/device-shell-guide/package.json",
+        "https://cdn.jsdelivr.net/gh/lwx20021120/dafeiyu-studio@main/app/src/main/assets/device-shell-guide/package.json",
+        "https://ghproxy.net/https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/device-shell-guide/package.json"
+      ]
+    },
+    {
+      "path": "app/src/main/assets/device-shell-guide/lib/index.js",
+      "asset": "device-shell-guide/lib/index.js",
+      "size": 9154,
+      "sha256": "4e9ff0867b6479cfe3e230e70c65cece5d43cac96bc4735d5024d6b53cf7c7dc",
+      "urls": [
+        "https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/device-shell-guide/lib/index.js",
+        "https://cdn.jsdelivr.net/gh/lwx20021120/dafeiyu-studio@main/app/src/main/assets/device-shell-guide/lib/index.js",
+        "https://ghproxy.net/https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/device-shell-guide/lib/index.js"
+      ]
+    },
+    {
+      "path": "app/src/main/assets/task-notifier/package.json",
+      "asset": "task-notifier/package.json",
+      "size": 325,
+      "sha256": "bdc77d51c191c0e5bc64467c51f43af6b2668ad1d54cfe90aee9465354d412e4",
+      "urls": [
+        "https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/task-notifier/package.json",
+        "https://cdn.jsdelivr.net/gh/lwx20021120/dafeiyu-studio@main/app/src/main/assets/task-notifier/package.json",
+        "https://ghproxy.net/https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/task-notifier/package.json"
+      ]
+    },
+    {
+      "path": "app/src/main/assets/task-notifier/lib/index.js",
+      "asset": "task-notifier/lib/index.js",
+      "size": 2685,
+      "sha256": "b90f85cc72d20ba190b35733a1aec3fb8a1b9d73bfe0331b3217d82195d133de",
+      "urls": [
+        "https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/task-notifier/lib/index.js",
+        "https://cdn.jsdelivr.net/gh/lwx20021120/dafeiyu-studio@main/app/src/main/assets/task-notifier/lib/index.js",
+        "https://ghproxy.net/https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/task-notifier/lib/index.js"
+      ]
+    },
+    {
+      "path": "app/src/main/assets/mobile-nav/package.json",
+      "asset": "mobile-nav/package.json",
+      "size": 2137,
+      "sha256": "b80273b3cb53a7c2aac643a6838c7d4d39f98374c22ee467692f977d41fc61ab",
+      "urls": [
+        "https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/mobile-nav/package.json",
+        "https://cdn.jsdelivr.net/gh/lwx20021120/dafeiyu-studio@main/app/src/main/assets/mobile-nav/package.json",
+        "https://ghproxy.net/https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/mobile-nav/package.json"
+      ]
+    },
+    {
+      "path": "app/src/main/assets/mobile-nav/lib/client.js",
+      "asset": "mobile-nav/lib/client.js",
+      "size": 132303,
+      "sha256": "6c6ee969b3de2d7f04eafd4b70319c8f9c8891a72a21090fb5878636be6b2e04",
+      "urls": [
+        "https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/mobile-nav/lib/client.js",
+        "https://cdn.jsdelivr.net/gh/lwx20021120/dafeiyu-studio@main/app/src/main/assets/mobile-nav/lib/client.js",
+        "https://ghproxy.net/https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/mobile-nav/lib/client.js"
+      ]
+    },
+    {
+      "path": "app/src/main/assets/mobile-nav/lib/index.js",
+      "asset": "mobile-nav/lib/index.js",
+      "size": 317,
+      "sha256": "855d07192c12ac831830e87246216dbc74ad8c83a6d67ae00ee7e89a378591ef",
+      "urls": [
+        "https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/mobile-nav/lib/index.js",
+        "https://cdn.jsdelivr.net/gh/lwx20021120/dafeiyu-studio@main/app/src/main/assets/mobile-nav/lib/index.js",
+        "https://ghproxy.net/https://raw.githubusercontent.com/lwx20021120/dafeiyu-studio/main/app/src/main/assets/mobile-nav/lib/index.js"
+      ]
+    }
+  ]
+}

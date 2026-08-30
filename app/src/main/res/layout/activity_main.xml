@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/surface"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/page_pad"
+        android:paddingEnd="@dimen/gap_control">
+
+        <FrameLayout
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/bg_logo">
+
+            <ImageView
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_gravity="center"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_terminal"
+                android:tint="@color/primary" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/app_title"
+            style="@style/DshaText.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/gap_control"
+            android:text="启动" />
+
+        <!-- 插件页的 GitHub 链接输入框：嵌在标题与「关于」之间。
+             默认 gone，切到插件页时由 MainActivity 显示 ——
+             它在 app_bar 里而不是 fragment 里，是为了不让插件页
+             再为一个输入框单独占一行。 -->
+        <EditText
+            android:id="@+id/appbar_github_input"
+            android:layout_width="0dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="@dimen/gap_control"
+            android:layout_marginEnd="@dimen/gap_tight"
+            android:layout_weight="1"
+            android:background="@drawable/bg_input"
+            android:ellipsize="end"
+            android:hint="🔗 粘贴 GitHub 链接"
+            android:imeOptions="actionGo"
+            android:importantForAutofill="no"
+            android:inputType="textUri"
+            android:maxLines="1"
+            android:paddingStart="@dimen/gap_control"
+            android:paddingEnd="@dimen/gap_control"
+            android:singleLine="true"
+            android:textColor="@color/text"
+            android:textColorHint="@color/text_muted"
+            android:textSize="@dimen/text_caption"
+            android:visibility="gone" />
+
+        <!-- 标题右侧的弹性占位：没有输入框时把「关于」挤到最右 -->
+        <View
+            android:id="@+id/appbar_spacer"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <FrameLayout
+            android:id="@+id/btn_about"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/bg_chip_clickable"
+            android:clickable="true"
+            android:contentDescription="关于"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="center"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_about"
+                android:tint="@color/text_secondary" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- 底栏与内容区之间的分界线：没有它底栏会和页面糊在一起 -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/stroke"
+        android:background="@color/line" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/card"
+        app:elevation="0dp"
+        app:itemIconTint="@color/nav_item_tint"
+        app:itemTextColor="@color/nav_item_tint"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_nav_menu" />
+</LinearLayout>
